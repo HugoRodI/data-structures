@@ -10,7 +10,7 @@ int main()
     pstr = str;
     printf("\n Enter the string: ");
     gets(str);
-    while(*pstr++ != '\n')
+    while(*pstr++ != '\0')
         length += 1;
     printf("\n The length of the string is: %d", length);
     return 0;

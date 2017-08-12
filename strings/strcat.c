@@ -15,8 +15,8 @@ int main()
     pdeststr = deststr;
     psrcstr = srcstr;
 
-    while(*pdeststr)
-        pdeststr++;
+    while(*pdeststr && pdeststr++;)
+        ;
     while(*pdeststr++ = *psrcstr++)
         ;
 
