@@ -310,16 +310,81 @@ struct node *delete_end(struct node *start)
 
 struct node *delete_before(struct node *start)
 {
+    struct node *ptr;
+    int num;
+
+    printf("\n Delete the node before the node: ");
+    scanf("%d", &num);
+
+    ptr = start;
+
+    while((ptr->next)->data != num)
+        ptr = ptr->next;
+
+    if(ptr != start)
+    {
+        ptr->prev->next = ptr->next;
+        ptr->next->prev = ptr->prev;
+    }
+    else
+    {
+        ptr->next->prev = NULL;
+        start = ptr->next;
+        ptr->next = NULL;
+    }
+    free(ptr);
+
     return start;
 }
 
 struct node *delete_after(struct node *start)
 {
+    struct node *ptr;
+    int num;
+
+    printf("\n Delete the node after the node: ");
+    scanf("%d", &num);
+
+    ptr = start;
+
+    while(ptr->data != num)
+        ptr = ptr->next;
+
+    ptr = ptr->next;
+
+    if(ptr->next != NULL)
+    {
+        ptr->next->prev = ptr->prev;
+        ptr->prev->next = ptr->next;
+    }
+    else
+    {
+        ptr->prev->next = NULL;
+        ptr = NULL;
+    }
+
+    free(ptr);
 
     return start;
 }
 
 struct node *delete_list(struct node *start)
 {
+    struct node *ptr;
+
+    ptr = start;
+
+    while(ptr->next != NULL)
+    {
+        start = ptr->next;
+        ptr->next->prev = NULL;
+        ptr->next = NULL;
+        free(ptr);
+        ptr = start;
+    }
+
+    start = start->next;
+    free(ptr);
+
     return start;
 }
