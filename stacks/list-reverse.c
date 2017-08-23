@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define SIZE 1
+#define SIZE 5
 
 int st[SIZE];
 int top = -1;
@@ -30,7 +30,6 @@ int main()
 
     for (i = 0; i < SIZE; ++i)
         printf("\n %d", inversed[i]);
-
 
     return 0;
 }
