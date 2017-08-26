@@ -91,7 +91,7 @@ int delete()
 
 }
 
-int peek(void )
+int peek()
 {
     if(front == -1 || front > rear)
         printf("\n THE QUEUE IS EMPTY \n");
@@ -101,7 +101,7 @@ int peek(void )
     return -1;
 }
 
-void display(void )
+void display()
 {
     int i;
     printf("\n");
