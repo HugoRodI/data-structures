@@ -1,31 +1,23 @@
 #include <stdio.h>
-#include <conio.h>
 #include <malloc.h>
 
 struct node
 {
     int data;
     struct node *next;
-};
+}*front, *rear;
 
-struct queue
-{
-    struct node *front;
-    struct node *rear;
-};
-
-struct queue *q;
-void create_queue(struct queue *);
-struct queue *insert(struct queue *, int);
-struct queue *delete(struct queue *);
-struct queue *display(struct queue *);
-int peek(struct queue *);
+void create_queue();
+struct node *insert(int);
+struct node *delete();
+struct node *display();
+int peek();
 
 int main()
 {
     int option, num;
 
-    create_queue(q);
+    create_queue();
 
     do
     {
@@ -41,23 +33,23 @@ int main()
         switch(option)
         {
             case 1:
-                printf("\n Enter the number to insert in the queue");
+                printf("\n Enter the number to insert in the queue: ");
                 scanf("%d", &num);
-                q = insert(q, num);
+                front = insert(num);
                 break;
 
             case 2:
-                q = delete(q);
+                front  = delete();
                 break;
 
             case 3:
-                num = peek(q);
+                num = peek();
                 if (num != -1)
                     printf("\n The value at front of the queue is %d", num);
                 break;
 
             case 4:
-                q = display(q);
+                front = display();
                 break;
         }
     }while(option != 5);
@@ -65,15 +57,13 @@ int main()
     return 0;
 }
 
-void create_queue(struct queue *q)
+void create_queue()
 {
-    printf("\n breaks in line 71 q->rear = NULL;");
-    q->rear = NULL;
-    printf("\n breaks in line 73 q->front = NULL;");
-    q->front = NULL;
+    rear = NULL;
+    front = NULL;
 }
 
-struct queue *insert(struct queue *q, int num)
+struct node *insert(int num)
 {
     struct node *ptr;
 
@@ -81,49 +71,53 @@ struct queue *insert(struct queue *q, int num)
     ptr->data = num;
     ptr->next = NULL;
 
-    if(q->front == NULL)
-        q->front = ptr;
+    if(front == NULL)
+        front = ptr;
     else
-        q->rear->next = ptr;
+        rear->next = ptr;
 
-    q->rear = ptr;
+    rear = ptr;
 
-    return q;
+    return front;
 }
 
-struct queue *delete(struct queue *q)
+struct node *delete()
 {
     struct node *ptr;
 
-    if(q->front == NULL)
-        printf("\n UNDERFLOW, THE QUEUE IS EMPTY");
+    if(front == NULL)
+        printf("\n THE QUEUE IS EMPTY");
     else
     {
-        /*CHECK CODE*/
-        ptr = q->front->next;
-        free(q->front);
-        q->front = ptr;
+      /*  CHECK CODE */
+        ptr = front;
+        front = front->next;
+        free(ptr);
     }
+
+    return front;
 }
 
-struct queue *display(struct queue *q)
+struct node *display()
 {
     struct node *ptr;
 
-    if(q->front == NULL)
-        printf("\n UNDERFLOW, THE QUEUE IS EMPTY");
+    if(front == NULL)
+        printf("\n THE QUEUE IS EMPTY");
     else
     {
-        ptr = q->front;
+        ptr = front;
         while(ptr != NULL)
         {
             printf("\t %d", ptr->data);
             ptr = ptr->next;
         }
     }
+
+    return front;
 }
 
-int peek(struct queue *q)
+int peek()
 {
     return 0;
 }
